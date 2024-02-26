@@ -1,10 +1,12 @@
 const fetchQuote = async () => {
   try {
-    const result = await fetch("https://api.adviceslip.com/advice");
+    const result = await fetch("https://api.adviceslip.com/advice", {
+      cache: "no-cache",
+    });
     const data = await result.json();
     showQuote(data.slip.id, data.slip.advice);
   } catch (error) {
-    console.error("Błąd podczas pobierania danych:", error);
+    console.error("Error:", error);
   }
 };
 
@@ -23,7 +25,7 @@ const init = () => {
   fetchQuote();
   const adviceButton = document.querySelector(".advice-button");
 
-  adviceButton.addEventListener("click", () => handleAdviceButton());
+  adviceButton.addEventListener("click", handleAdviceButton);
 };
 
 init();
